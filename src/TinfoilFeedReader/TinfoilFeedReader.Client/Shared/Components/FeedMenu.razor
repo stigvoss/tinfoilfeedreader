@@ -1,0 +1,29 @@
+﻿@inherits TinfoilFeedReader.Client.Shared.Components.CodeBehinds.FeedMenuComponent
+
+<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">TinfoilFeedReader</a>
+    <button class="navbar-toggler" onclick="@ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" onclick="@ToggleNavMenu">
+    <ul class="nav flex-column">
+        @if (Collection is object)
+        {
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="@($"/feedcollection/69040700-3b62-42cf-803e-0c26c40db842")" Match="NavLinkMatch.All">
+                    <span class="oi oi-home" aria-hidden="true"></span> All
+                </NavLink>
+            </li>
+            @foreach (var feed in Collection.Feeds)
+            {
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="@($"/feedcollection/69040700-3b62-42cf-803e-0c26c40db842/feed/{feed.Id.ToString()}")" Match="NavLinkMatch.All">
+                        <span class="oi oi-list" aria-hidden="true"></span> @feed.Name
+                    </NavLink>
+                </li>
+            }
+        }
+    </ul>
+</div>
