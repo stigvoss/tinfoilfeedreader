@@ -1,2 +1,2 @@
-# tinfoilfeedreader
+# TinfoilFeedReader
 RSS feed reader
