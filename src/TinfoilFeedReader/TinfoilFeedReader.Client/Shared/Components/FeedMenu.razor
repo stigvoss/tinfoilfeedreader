@@ -1,12 +1,5 @@
 ﻿@inherits TinfoilFeedReader.Client.Shared.Components.CodeBehinds.FeedMenuComponent
 
-<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">TinfoilFeedReader</a>
-    <button class="navbar-toggler" onclick="@ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
 <div class="@NavMenuCssClass" onclick="@ToggleNavMenu">
     <ul class="nav flex-column">
         @if (Collection is object)
