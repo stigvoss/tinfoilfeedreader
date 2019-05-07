@@ -3,12 +3,12 @@
 <div class="feed-box">
     <div class="image"></div>
     <h5>
-        <a href="@FeedEntry.Link" target="_blank">
+        <a href="@FeedEntry.SourceUrl" target="_blank">
             @FeedEntry.Title
         </a>
     </h5>
     <em>
-        @FeedEntry.SourcePage, @FeedEntry.SimpleTimeSincePublish()
+        @FeedEntry.SourceDomain, @FeedEntry.SimpleTimeSincePublish()
     </em>
     <p>@FeedEntry.Summary</p>
 </div>

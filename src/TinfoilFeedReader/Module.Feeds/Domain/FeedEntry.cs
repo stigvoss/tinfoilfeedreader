@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Module.Feeds.Domain.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Syndication;
@@ -9,9 +10,9 @@ namespace Module.Feeds.Domain
     {
         public string Title { get; set; }
 
-        public string Link { get; set; }
+        public string SourceUrl { get; set; }
 
-        public string SourcePage => new Uri(Link).Host;
+        public string SourceDomain => new Uri(SourceUrl).Host;
 
         public DateTimeOffset PublishDate { get; set; }
 
@@ -39,16 +40,17 @@ namespace Module.Feeds.Domain
 
         public string Summary { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public static explicit operator FeedEntry(SyndicationItem item)
-        {
-            return new FeedEntry
+            => new FeedEntry
             {
                 Title = item.Title?.Text,
-                Link = item.Links?.FirstOrDefault().Uri.AbsoluteUri,
+                SourceUrl = item.Links?.FirstOrDefault().Uri.AbsoluteUri,
                 PublishDate = item.PublishDate,
                 Authors = item.Authors?.Select(e => e.Name),
-                Summary = item.Summary?.Text
+                Summary = item.Summary?.Text,
+                ImageUrl = ContentService.ReadImage(item.Content)
             };
-        }
     }
 }
