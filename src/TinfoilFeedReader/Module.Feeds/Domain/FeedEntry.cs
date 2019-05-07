@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Syndication;
 
@@ -10,7 +11,11 @@ namespace Module.Feeds.Domain
 
         public string Link { get; set; }
 
-        public DateTimeOffset PublishDate { get; private set; }
+        public string SourcePage => new Uri(Link).Host;
+
+        public DateTimeOffset PublishDate { get; set; }
+
+        public IEnumerable<string> Authors { get; set; }
 
         public static explicit operator FeedEntry(SyndicationItem item)
         {
@@ -18,7 +23,8 @@ namespace Module.Feeds.Domain
             {
                 Title = item.Title?.Text,
                 Link = item.Links?.FirstOrDefault().Uri.AbsoluteUri,
-                PublishDate = item.PublishDate
+                PublishDate = item.PublishDate,
+                Authors = item.Authors?.Select(e => e.Name)
             };
         }
     }

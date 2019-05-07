@@ -1,0 +1,11 @@
+﻿@inherits TinfoilFeedReader.Client.Shared.Components.CodeBehinds.FeedBoxComponent
+
+<div class="feed-box">
+    <div class="image"></div>
+    <a href="@FeedEntry.Link" target="_blank">
+        <h5>@FeedEntry.Title</h5>
+    </a>
+    <em>
+        @FeedEntry.SourcePage, @FeedEntry.PublishDate.LocalDateTime
+    </em>
+</div>

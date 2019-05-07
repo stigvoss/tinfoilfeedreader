@@ -1,0 +1,13 @@
+[
+  {
+    "outputFile": "wwwroot/assets/app.css",
+    "inputFile": "Styles/App.scss",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "options": {
+      "sourceMap": true
+    }
+  }
+]

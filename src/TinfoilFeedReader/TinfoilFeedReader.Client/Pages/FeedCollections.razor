@@ -10,11 +10,13 @@
 <main>
     <h1>@Title</h1>
 
-    @if (FeedEntries is object)
-    {
-        foreach (var entry in FeedEntries)
+    <div class="feed">
+        @if (FeedEntries is object)
         {
-            <p><a href="@entry.Link" target="_blank">@entry.Title</a> - <em>@entry.PublishDate.LocalDateTime</em></p>
+            foreach (var entry in FeedEntries)
+            {
+                <FeedBox FeedEntry=@entry />
+            }
         }
-    }
+    </div>
 </main>
