@@ -97,7 +97,7 @@ main {
             margin: 0.25rem 0.25rem 1rem 0.25rem;
             width: calc(0.5rem + #{$feed-box-width});
 
-            & > .image {
+            .image {
                 width: $feed-box-width;
                 height: calc(#{$feed-box-width} * 0.8);
                 background-color: lightgrey;
@@ -106,8 +106,12 @@ main {
                 border: 1px solid grey;
             }
 
-            & > em {
+            em {
                 font-size: 0.75rem;
+            }
+
+            p {
+                font-size: 0.8rem;
             }
         }
     }

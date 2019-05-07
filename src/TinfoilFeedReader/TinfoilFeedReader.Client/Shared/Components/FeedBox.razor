@@ -6,6 +6,7 @@
         <h5>@FeedEntry.Title</h5>
     </a>
     <em>
-        @FeedEntry.SourcePage, @FeedEntry.PublishDate.LocalDateTime
+        @FeedEntry.SourcePage, @FeedEntry.SimpleTimeSincePublish().SimpleDate()
     </em>
+    <p>@FeedEntry.Summary</p>
 </div>
