@@ -101,7 +101,7 @@ app {
 
                     .image {
                         width: $feed-box-width;
-                        height: calc(#{$feed-box-width} * 0.8);
+                        height: calc(#{$feed-box-width} * 2 / 3);
                         background-color: black;
                         margin-bottom: 0.5rem;
                         border-radius: 3px;
