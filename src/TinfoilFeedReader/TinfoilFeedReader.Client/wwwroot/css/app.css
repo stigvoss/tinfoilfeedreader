@@ -1,0 +1,77 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+}
+
+body {
+    line-height: 1.5;
+}
+
+app {
+    height: 100vh;
+}
+
+    app > nav {
+        background-color: #343a40;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+        z-index: 999;
+    }
+
+.brand {
+    color: white;
+    text-decoration: none;
+    font-size: 1.25rem;
+    padding: 0.75rem 0 0.75rem 0.75rem;
+    display: inline-block;
+}
+
+app > div {
+    display: flex;
+    margin-top: 3.25rem;
+    align-items: stretch;
+    height: calc(100vh - 3.25rem);
+}
+
+    app > div > nav {
+        position: fixed;
+        top: 3.25rem;
+        left: 0;
+        bottom: 0;
+        width: 256px;
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    }
+
+        app > div > nav > h6 {
+            text-transform: uppercase;
+            color: darkgrey;
+            font-weight: 400;
+            font-size: 0.7rem;
+            margin: 1.5rem 0 0.25rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        app > div > nav li {
+            font-size: 1rem;
+            font-weight: 200;
+            list-style: none;
+        }
+
+        app > div > nav li a {
+            color: inherit;
+        }
+
+main {
+    margin-left: 256px;
+    padding: 1.5rem;
+}

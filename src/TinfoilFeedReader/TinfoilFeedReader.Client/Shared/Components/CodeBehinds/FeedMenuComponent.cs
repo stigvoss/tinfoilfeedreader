@@ -10,10 +10,6 @@ namespace TinfoilFeedReader.Client.Shared.Components.CodeBehinds
 {
     public class FeedMenuComponent : ComponentBase
     {
-        bool collapseNavMenu = true;
-
-        protected string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
         [Inject]
         public HttpClient Http { get; set; }
 
@@ -24,11 +20,6 @@ namespace TinfoilFeedReader.Client.Shared.Components.CodeBehinds
         protected override async Task OnInitAsync()
         {
             Collection = await Http.GetJsonAsync<FeedCollection>("api/feedcollection/69040700-3b62-42cf-803e-0c26c40db842");
-        }
-
-        protected void ToggleNavMenu()
-        {
-            collapseNavMenu = !collapseNavMenu;
         }
     }
 }

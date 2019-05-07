@@ -2,12 +2,19 @@
 @page "/feedcollections/{FeedCollectionId}/feed/{FeedId}"
 @inherits TinfoilFeedReader.Client.Pages.CodeBehinds.FeedCollectionsComponent
 
-<h1>@Title</h1>
 
-@if (Entries is object)
-{
-    foreach (var entry in Entries)
+<SideBar>
+    <FeedMenu />
+</SideBar>
+
+<main>
+    <h1>@Title</h1>
+
+    @if (Entries is object)
     {
-        <p><a href="@entry.Link">@entry.Title</a> - <em>@entry.PublishDate.LocalDateTime</em></p>
+        foreach (var entry in Entries)
+        {
+            <p><a href="@entry.Link">@entry.Title</a> - <em>@entry.PublishDate.LocalDateTime</em></p>
+        }
     }
-}
+</main>
