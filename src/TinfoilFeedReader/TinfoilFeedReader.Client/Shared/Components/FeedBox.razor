@@ -2,11 +2,13 @@
 
 <div class="feed-box">
     <div class="image"></div>
-    <a href="@FeedEntry.Link" target="_blank">
-        <h5>@FeedEntry.Title</h5>
-    </a>
+    <h5>
+        <a href="@FeedEntry.Link" target="_blank">
+            @FeedEntry.Title
+        </a>
+    </h5>
     <em>
-        @FeedEntry.SourcePage, @FeedEntry.SimpleTimeSincePublish().SimpleDate()
+        @FeedEntry.SourcePage, @FeedEntry.SimpleTimeSincePublish()
     </em>
     <p>@FeedEntry.Summary</p>
 </div>

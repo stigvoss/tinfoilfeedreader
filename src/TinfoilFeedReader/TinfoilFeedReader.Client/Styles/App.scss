@@ -1,5 +1,10 @@
 ﻿$feed-box-width: 20vw;
 
+$background-color: #333;
+//$sidebar-background-color: #f8f9fa;
+$sidebar-background-color: #222;
+$font-color: #eee;
+
 * {
     padding: 0;
     margin: 0;
@@ -10,6 +15,8 @@
 
 body {
     line-height: 1.5;
+    background-color: $background-color;
+    color: $font-color;
 }
 
 app {
@@ -45,7 +52,7 @@ app {
             left: 0;
             bottom: 0;
             width: 256px;
-            background-color: #f8f9fa;
+            background-color: $sidebar-background-color;
             padding: 2rem 1.5rem 1.5rem 1.5rem;
             box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 
@@ -70,48 +77,52 @@ app {
                 }
             }
         }
-    }
-}
 
-main {
-    margin-left: 256px;
-    padding: 3rem 6rem 3rem 6rem;
+        main {
+            margin-left: 256px;
+            padding: 3rem 6rem 3rem 6rem;
 
-    h1 {
-        padding-bottom: 4rem;
-        font-size: 2.5rem;
-        font-weight: 400;
-    }
-
-    .feed {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-left: -0.5rem;
-        margin-right: -0.5rem;
-
-        .feed-box {
-            display: inline-block;
-            padding: 0.25rem;
-            margin: 0.25rem 0.25rem 1rem 0.25rem;
-            width: calc(0.5rem + #{$feed-box-width});
-
-            .image {
-                width: $feed-box-width;
-                height: calc(#{$feed-box-width} * 0.8);
-                background-color: lightgrey;
-                margin-bottom: 0.5rem;
-                border-radius: 3px;
-                border: 1px solid grey;
+            h1 {
+                padding-bottom: 4rem;
+                font-size: 2.5rem;
+                font-weight: 400;
             }
 
-            em {
-                font-size: 0.75rem;
-            }
+            .feed {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                margin-left: -0.5rem;
+                margin-right: -0.5rem;
 
-            p {
-                font-size: 0.8rem;
+                .feed-box {
+                    display: inline-block;
+                    padding: 0.25rem;
+                    margin: 0.25rem 0.25rem 1rem 0.25rem;
+                    width: calc(0.5rem + #{$feed-box-width});
+
+                    .image {
+                        width: $feed-box-width;
+                        height: calc(#{$feed-box-width} * 0.8);
+                        background-color: black;
+                        margin-bottom: 0.5rem;
+                        border-radius: 3px;
+                        border: 1px solid grey;
+                    }
+
+                    a {
+                        color: inherit;
+                    }
+
+                    em {
+                        font-size: 0.75rem;
+                    }
+
+                    p {
+                        font-size: 0.8rem;
+                    }
+                }
             }
         }
     }
