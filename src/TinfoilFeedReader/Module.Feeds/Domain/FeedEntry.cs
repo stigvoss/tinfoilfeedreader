@@ -12,28 +12,28 @@ namespace Module.Feeds.Domain
 
         public string SourceUrl { get; set; }
 
-        public string SourceDomain => new Uri(SourceUrl).Host;
+        public string SourceName { get; set; }
 
         public DateTimeOffset PublishDate { get; set; }
 
-        public string SimpleTimeSincePublish()
+        public string TimeSincePublish()
         {
             var timeSince = DateTime.Now - PublishDate.LocalDateTime;
 
             if (timeSince < TimeSpan.FromMinutes(1))
             {
-                return $"{Math.Round(timeSince.TotalSeconds)}s";
+                return $"{timeSince.Seconds}s";
             }
             else if (timeSince < TimeSpan.FromHours(1))
             {
-                return $"{Math.Round(timeSince.TotalMinutes)}m";
+                return $"{timeSince.Minutes}m";
             }
             else if (timeSince < TimeSpan.FromDays(1))
             {
-                return $"{Math.Round(timeSince.TotalHours)}h";
+                return $"{timeSince.Hours}h";
             }
 
-            return $"{Math.Round(timeSince.TotalDays)}d";
+            return $"{timeSince.Days}d";
         }
 
         public IEnumerable<string> Authors { get; set; }
@@ -50,7 +50,7 @@ namespace Module.Feeds.Domain
                 PublishDate = item.PublishDate,
                 Authors = item.Authors?.Select(e => e.Name),
                 Summary = item.Summary?.Text,
-                ImageUrl = ContentService.ReadImage(item.Content)
+                ImageUrl = ContentService.ReadImageUrl(item.Content)
             };
     }
 }

@@ -38,7 +38,11 @@ namespace Module.Feeds.Infrastructure.Services
 
                     foreach (var item in feed.Items)
                     {
-                        entries.Add((FeedEntry)item);
+                        var feedEntry = (FeedEntry)item;
+
+                        feedEntry.SourceName = feedSource.Name;
+
+                        entries.Add(feedEntry);
                     }
                 }
             }

@@ -8,7 +8,7 @@ namespace Module.Feeds.Domain.Services
 {
     public class ContentService
     {
-        public static string ReadImage(SyndicationContent content)
+        public static string ReadImageUrl(SyndicationContent content)
         {
             var textContent = content as TextSyndicationContent;
 
