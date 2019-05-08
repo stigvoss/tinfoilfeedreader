@@ -1,7 +1,12 @@
 ﻿@inherits TinfoilFeedReader.Client.Shared.Components.CodeBehinds.FeedBoxComponent
 
 <div class="feed-box">
-    <div class="image"></div>
+    <div class="image">
+        @if (ImageData is object)
+        {
+            <img src="data:image/jpg;base64,@ImageData" />
+        }
+    </div>
     <h5>
         <a href="@FeedEntry.SourceUrl" target="_blank">
             @FeedEntry.Title
