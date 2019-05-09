@@ -19,7 +19,7 @@ namespace Module.Feeds.Tests
         }
 
         [Test]
-        public void Can_Read_Feed_Names()
+        public void Can_Read_Outline_Feed_Names()
         {
             string expectedFeedName = "YouTube-abonnementer";
 
@@ -29,7 +29,7 @@ namespace Module.Feeds.Tests
         }
 
         [Test]
-        public void Can_Read_FeedSources()
+        public void Can_Read_Outlines()
         {
             int expectedFeedCount = 7;
 
@@ -39,8 +39,11 @@ namespace Module.Feeds.Tests
         }
 
         [Test]
-        public void Can_Read_FeedSource_Names()
+        public void Can_Read_Outline_Names()
         {
+            string expectedTitle1 = "SmarterEveryDay";
+            string expectedTitle2 = "CGP Grey";
+
             Feed feed = _opml.LoadFeedFrom(TestOpml);
 
             foreach (var feedSource in feed.Sources)
@@ -49,18 +52,20 @@ namespace Module.Feeds.Tests
                 Assert.That(feedSource.Name, Is.Not.Empty);
             }
 
-            Assert.That(feed.Sources.Select(fs => fs.Name), Contains.Item("SmarterEveryDay"));
-            Assert.That(feed.Sources.Select(fs => fs.Name), Contains.Item("CGP Grey"));
+            Assert.That(feed.Sources.Select(fs => fs.Name), Contains.Item(expectedTitle1));
+            Assert.That(feed.Sources.Select(fs => fs.Name), Contains.Item(expectedTitle2));
         }
 
         [Test]
-        public void Can_Read_FeedSource_Urls()
+        public void Can_Read_Outline_Urls()
         {
+            string expectedHost = "www.youtube.com";
+
             Feed feed = _opml.LoadFeedFrom(TestOpml);
 
             foreach (var feedSource in feed.Sources)
             {
-                Assert.That(feedSource.Url.Host, Is.EqualTo("www.youtube.com"));
+                Assert.That(feedSource.Url.Host, Is.EqualTo(expectedHost));
             }
         }
     }
