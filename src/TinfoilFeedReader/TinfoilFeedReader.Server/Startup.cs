@@ -6,9 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Module.Feeds.Domain;
 using Module.Feeds.Domain.Base;
-using Module.Feeds.Infrastructure.EntityFrameworkCore;
-using Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories;
-using Module.Feeds.Infrastructure.Repositories;
+using Module.Feeds.Infrastructure.Dapper;
 using Newtonsoft.Json.Serialization;
 using System.Data.SqlClient;
 using System.Linq;
@@ -36,9 +34,11 @@ namespace TinfoilFeedReader.Server
                 InitialCatalog = "Tinfoil"
             };
 
-            services.AddDbContext<FeedCollectionContext>(options => 
-                options.UseSqlServer(builder.ConnectionString));
-            services.AddScoped<IRepository<FeedCollection>, EfFeedCollectionRepository>();
+            services.AddScoped<IRepository<FeedCollection>, FeedCollectionRepository>(provider =>
+            {
+                var connection = new SqlConnection(builder.ConnectionString);
+                return new FeedCollectionRepository(connection);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

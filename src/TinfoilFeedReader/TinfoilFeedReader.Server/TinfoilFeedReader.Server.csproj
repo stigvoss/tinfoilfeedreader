@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Module.Feeds.Infrastructure.Dapper\Module.Feeds.Infrastructure.Dapper.csproj" />
     <ProjectReference Include="..\Module.Feeds.Infrastructure.EntityFrameworkCore\Module.Feeds.Infrastructure.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Module.Feeds\Module.Feeds.csproj" />
     <ProjectReference Include="..\TinfoilFeedReader.Client\TinfoilFeedReader.Client.csproj" />
