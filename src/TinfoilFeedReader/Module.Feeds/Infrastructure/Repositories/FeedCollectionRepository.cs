@@ -47,8 +47,16 @@ namespace Module.Feeds.Infrastructure.Repositories
                     },
                     new Feed {
                         Id = Guid.Parse("{D0867B47-0DB5-446E-99E0-5F66674F4AD1}"),
-                        Name = "YouTube subscriptions",
-                        Sources = new List<FeedSource>()
+                        Name = "YouTube Subscriptions",
+                        Sources = new List<FeedSource>
+                        {
+                            new FeedSource
+                            {
+                                Id = Guid.Parse("{FF5A433A-2425-4711-85B9-05E4DD86A4DE}"),
+                                Name = "CGP Grey",
+                                Url = new Uri("https://www.youtube.com/feeds/videos.xml?channel_id=UC2C_jShtL725hvbm1arSV9w")
+                            }
+                        }
                     }
                 }
             }
