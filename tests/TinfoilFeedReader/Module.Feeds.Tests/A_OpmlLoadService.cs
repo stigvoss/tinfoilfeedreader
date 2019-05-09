@@ -29,7 +29,7 @@ namespace Module.Feeds.Tests
         }
 
         [Test]
-        public void Can_Read_Outlines()
+        public void Can_Read_Outlines_With_Child_Outlines()
         {
             int expectedFeedCount = 7;
 
