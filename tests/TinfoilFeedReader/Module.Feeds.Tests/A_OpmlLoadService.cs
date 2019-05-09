@@ -1,6 +1,7 @@
 using Module.Feeds.Domain;
 using Module.Feeds.Infrastructure.Services;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -65,7 +66,7 @@ namespace Module.Feeds.Tests
 
             foreach (var feedSource in feed.Sources)
             {
-                Assert.That(feedSource.Url.Host, Is.EqualTo(expectedHost));
+                Assert.That(new Uri(feedSource.Url).Host, Is.EqualTo(expectedHost));
             }
         }
     }

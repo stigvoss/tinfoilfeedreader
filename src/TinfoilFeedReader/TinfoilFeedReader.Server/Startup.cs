@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Module.Feeds.Domain;
 using Module.Feeds.Domain.Base;
+using Module.Feeds.Infrastructure.EntityFrameworkCore;
+using Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories;
 using Module.Feeds.Infrastructure.Repositories;
 using Newtonsoft.Json.Serialization;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace TinfoilFeedReader.Server
@@ -23,7 +27,18 @@ namespace TinfoilFeedReader.Server
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" });
             });
-            services.AddScoped<IRepository<FeedCollection>, FeedCollectionRepository>();
+
+            var builder = new SqlConnectionStringBuilder
+            {
+                DataSource = "dock02.voss.net",
+                UserID = "sa",
+                Password = "DevelopmentPassword01!",
+                InitialCatalog = "Tinfoil"
+            };
+
+            services.AddDbContext<FeedCollectionContext>(options => 
+                options.UseSqlServer(builder.ConnectionString));
+            services.AddScoped<IRepository<FeedCollection>, EfFeedCollectionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

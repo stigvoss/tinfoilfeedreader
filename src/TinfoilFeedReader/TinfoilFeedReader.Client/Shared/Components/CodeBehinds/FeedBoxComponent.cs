@@ -17,13 +17,5 @@ namespace TinfoilFeedReader.Client.Shared.Components.CodeBehinds
 
         [Inject]
         protected ImageLoadService ImageLoader { get; set; }
-
-        protected override async Task OnInitAsync()
-        {
-            //if (FeedEntry.ImageUrl is object)
-            //{
-            //    ImageData = await ImageLoader.ImageAsBase64From(FeedEntry.ImageUrl);
-            //}
-        }
     }
 }

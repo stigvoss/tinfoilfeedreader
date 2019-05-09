@@ -35,13 +35,13 @@ namespace Module.Feeds.Infrastructure.Repositories
                             {
                                 Id = Guid.Parse("{6F6CCD9C-F5B1-4F7F-99CF-601DA1276CAB}"),
                                 Name = "Ars Technica",
-                                Url = new Uri("https://feeds.feedburner.com/arstechnica/index")
+                                Url = "https://feeds.feedburner.com/arstechnica/index"
                             },
                             new FeedSource
                             {
                                 Id = Guid.Parse("{7F0E8887-A73A-4A97-B32E-27BF2825D08A}"),
                                 Name = "The Verge",
-                                Url = new Uri("https://www.theverge.com/rss/index.xml")
+                                Url = "https://www.theverge.com/rss/index.xml"
                             }
                         }
                     },
@@ -54,7 +54,7 @@ namespace Module.Feeds.Infrastructure.Repositories
                             {
                                 Id = Guid.Parse("{FF5A433A-2425-4711-85B9-05E4DD86A4DE}"),
                                 Name = "CGP Grey",
-                                Url = new Uri("https://www.youtube.com/feeds/videos.xml?channel_id=UC2C_jShtL725hvbm1arSV9w")
+                                Url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC2C_jShtL725hvbm1arSV9w"
                             }
                         }
                     }

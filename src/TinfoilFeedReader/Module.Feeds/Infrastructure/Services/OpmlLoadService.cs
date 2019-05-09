@@ -55,7 +55,7 @@ namespace Module.Feeds.Infrastructure.Services
                     var feedSource = new FeedSource
                     {
                         Name = title,
-                        Url = new Uri(url)
+                        Url = url
                     };
 
                     feedSources.Add(feedSource);
