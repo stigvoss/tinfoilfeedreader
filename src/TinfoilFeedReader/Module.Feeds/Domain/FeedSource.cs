@@ -3,18 +3,10 @@ using System;
 
 namespace Module.Feeds.Domain
 {
-    public class FeedSource : AggregateRoot<FeedSource>
+    public class FeedSource : IValueObject
     {
-        public FeedSource()
-            : base()
-        { }
-
-        public FeedSource(Guid id)
-            : base(id)
-        { }
-
         public string Name { get; set; }
 
-        public string Url { get; set; }
+        public virtual Source Source { get; set; }
     }
 }

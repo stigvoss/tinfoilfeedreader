@@ -13,13 +13,14 @@ namespace TinfoilFeedReader.Client.Shared.Components.CodeBehinds
         [Inject]
         public HttpClient Http { get; set; }
 
-        public FeedCollection Collection { get; private set; }
+        [Parameter]
+        public Guid FeedCollectionId { get; set; }
 
-        public Guid FeedCollectionId { get; set; } = Guid.Parse("69040700-3b62-42cf-803e-0c26c40db842");
+        public FeedCollection Collection { get; set; }
 
         protected override async Task OnInitAsync()
         {
-            Collection = await Http.GetJsonAsync<FeedCollection>("api/feedcollection/69040700-3b62-42cf-803e-0c26c40db842");
+            Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId}");
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Module.Feeds.Tests
 
             Feed feed = _opml.LoadFeedFrom(TestOpml);
 
-            Assert.That(feed.Sources.Count, Is.EqualTo(expectedFeedCount));
+            Assert.That(feed.FeedSources.Count, Is.EqualTo(expectedFeedCount));
         }
 
         [Test]
@@ -47,14 +47,14 @@ namespace Module.Feeds.Tests
 
             Feed feed = _opml.LoadFeedFrom(TestOpml);
 
-            foreach (var feedSource in feed.Sources)
+            foreach (var feedSource in feed.FeedSources)
             {
                 Assert.That(feedSource.Name, Is.Not.Null);
                 Assert.That(feedSource.Name, Is.Not.Empty);
             }
 
-            Assert.That(feed.Sources.Select(fs => fs.Name), Contains.Item(expectedTitle1));
-            Assert.That(feed.Sources.Select(fs => fs.Name), Contains.Item(expectedTitle2));
+            Assert.That(feed.FeedSources.Select(fs => fs.Name), Contains.Item(expectedTitle1));
+            Assert.That(feed.FeedSources.Select(fs => fs.Name), Contains.Item(expectedTitle2));
         }
 
         [Test]
@@ -64,9 +64,9 @@ namespace Module.Feeds.Tests
 
             Feed feed = _opml.LoadFeedFrom(TestOpml);
 
-            foreach (var feedSource in feed.Sources)
+            foreach (var feedSource in feed.FeedSources)
             {
-                Assert.That(new Uri(feedSource.Url).Host, Is.EqualTo(expectedHost));
+                Assert.That(new Uri(feedSource.Source.Url).Host, Is.EqualTo(expectedHost));
             }
         }
     }

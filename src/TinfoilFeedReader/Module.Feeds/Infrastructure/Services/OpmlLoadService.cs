@@ -25,7 +25,7 @@ namespace Module.Feeds.Infrastructure.Services
             return new Feed
             {
                 Name = title?.Value,
-                Sources = InspectOutlines(outline)
+                FeedSources = InspectOutlines(outline)
             };
         }
 
@@ -54,8 +54,11 @@ namespace Module.Feeds.Infrastructure.Services
                 {
                     var feedSource = new FeedSource
                     {
-                        Name = title,
-                        Url = url
+                        Source = new Source
+                        {
+                            Name = title,
+                            Url = url
+                        }
                     };
 
                     feedSources.Add(feedSource);

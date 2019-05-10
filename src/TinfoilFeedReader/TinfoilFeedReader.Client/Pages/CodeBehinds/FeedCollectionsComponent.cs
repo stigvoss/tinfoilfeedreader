@@ -19,7 +19,7 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
         [Inject]
         protected HttpClient Http { get; set; }
 
-        protected IEnumerable<FeedEntry> FeedEntries { get; set; }
+        protected IEnumerable<Article> Articles { get; set; }
 
         protected FeedCollection Collection { get; set; }
 
@@ -29,7 +29,7 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
         {
             if (FeedCollectionId is object)
             {
-                Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollection/{FeedCollectionId}")
+                Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId}")
                     .ConfigureAwait(false);
 
                 if (FeedId is object)
@@ -44,12 +44,12 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
 
             if (FeedCollectionId is object && FeedId is object)
             {
-                FeedEntries = await Http.GetJsonAsync<FeedEntry[]>($"api/feedcollection/{FeedCollectionId}/feed/{FeedId}/entries")
+                Articles = await Http.GetJsonAsync<Article[]>($"api/feedcollections/{FeedCollectionId}/feed/{FeedId}/entries")
                     .ConfigureAwait(false);
             }
             else if (FeedCollectionId is object)
             {
-                FeedEntries = await Http.GetJsonAsync<FeedEntry[]>($"api/feedcollection/{FeedCollectionId}/entries")
+                Articles = await Http.GetJsonAsync<Article[]>($"api/feedcollections/{FeedCollectionId}/entries")
                     .ConfigureAwait(false);
             }
         }

@@ -2,20 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Module.Feeds.Domain.Base
 {
     public interface IRepository<T> : IDisposable
         where T : IAggregateRoot<T>
     {
-        IEnumerable<T> All();
+        Task<IEnumerable<T>> All();
 
-        T Single(Guid id);
+        Task<T> Single(Guid id);
 
-        void Remove(T item);
+        Task Remove(T item);
 
-        void Update(T item);
+        Task Update(T item);
 
-        void Add(T item);
+        Task Add(T item);
     }
 }

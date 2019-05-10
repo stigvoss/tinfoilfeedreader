@@ -14,8 +14,10 @@ namespace Module.Feeds.Domain
             : base(id)
         { }
 
+        public int SequenceIndex { get; set; }
+
         public string Name { get; set; }
 
-        public ICollection<FeedSource> Sources { get; set; } = new List<FeedSource>();
+        public virtual ICollection<FeedSource> FeedSources { get; set; } = new List<FeedSource>();
     }
 }

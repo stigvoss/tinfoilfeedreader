@@ -1,25 +1,28 @@
 ﻿@inherits TinfoilFeedReader.Client.Shared.Components.CodeBehinds.FeedMenuComponent
 
-<h6>
-    <span>Collections</span>
-    <a>+</a>
-</h6>
-<ul>
-    @if (Collection is object)
-    {
-        <li>
-            <a href="@($"/feedcollections/{FeedCollectionId.ToString()}")">
-                All
-            </a>
-        </li>
-
-        foreach (var feed in Collection.Feeds)
+@if (FeedCollectionId != default)
+{
+    <h6>
+        <span>Collections</span>
+        <a>+</a>
+    </h6>
+    <ul>
+        @if (Collection is object)
         {
             <li>
-                <a href="@($"/feedcollections/{FeedCollectionId.ToString()}/feed/{feed.Id.ToString()}")">
-                    @feed.Name
+                <a href="@($"/feedcollections/{FeedCollectionId.ToString()}")">
+                    All
                 </a>
             </li>
+
+            foreach (var feed in Collection.Feeds.OrderBy(feed => feed.SequenceIndex))
+            {
+                <li>
+                    <a href="@($"/feedcollections/{FeedCollectionId.ToString()}/feed/{feed.Id.ToString()}")">
+                        @feed.Name
+                    </a>
+                </li>
+            }
         }
-    }
-</ul>
+    </ul>
+}

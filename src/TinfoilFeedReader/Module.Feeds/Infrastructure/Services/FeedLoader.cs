@@ -12,35 +12,35 @@ namespace Module.Feeds.Infrastructure.Services
 {
     public static class FeedLoader
     {
-        public static async Task<IEnumerable<FeedEntry>> EntriesFrom(FeedCollection collection)
+        public static async Task<IEnumerable<Article>> EntriesFrom(FeedCollection collection)
         {
-            var sources = collection.Feeds.SelectMany(e => e.Sources);
+            var sources = collection.Feeds.SelectMany(e => e.FeedSources);
             return await EntriesFrom(sources);
         }
 
-        public static async Task<IEnumerable<FeedEntry>> EntriesFrom(Feed feed)
+        public static async Task<IEnumerable<Article>> EntriesFrom(Feed feed)
         {
-            return await EntriesFrom(feed.Sources);
+            return await EntriesFrom(feed.FeedSources);
         }
 
-        public static async Task<IEnumerable<FeedEntry>> EntriesFrom(IEnumerable<FeedSource> feedSources)
+        public static async Task<IEnumerable<Article>> EntriesFrom(IEnumerable<FeedSource> feedSources)
         {
-            var entries = new List<FeedEntry>();
+            var entries = new List<Article>();
 
             var client = new HttpClient();
 
             foreach (var feedSource in feedSources)
             {
-                using (var stream = await client.GetStreamAsync(feedSource.Url))
+                using (var stream = await client.GetStreamAsync(feedSource.Source.Url))
                 using (var reader = XmlReader.Create(stream))
                 {
                     var feed = SyndicationFeed.Load(reader);
 
                     foreach (var item in feed.Items)
                     {
-                        var feedEntry = (FeedEntry)item;
+                        var feedEntry = (Article)item;
 
-                        feedEntry.SourceName = feedSource.Name;
+                        feedEntry.SourceName = feedSource.Name ?? feedSource.Source.Name;
 
                         entries.Add(feedEntry);
                     }

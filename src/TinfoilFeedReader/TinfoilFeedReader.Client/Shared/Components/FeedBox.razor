@@ -8,14 +8,14 @@
         }
     </div>
     <h5>
-        <a href="@FeedEntry.SourceUrl" target="_blank">
-            @FeedEntry.Title
+        <a href="@Article.Url" target="_blank">
+            @Article.Title
         </a>
     </h5>
     <em>
-        @FeedEntry.SourceName, @FeedEntry.TimeSincePublish()
+        @Article.SourceName, @Article.TimeSincePublish()
     </em>
     <p>
-        @FeedEntry.Summary
+        @Article.Summary
     </p>
 </div>

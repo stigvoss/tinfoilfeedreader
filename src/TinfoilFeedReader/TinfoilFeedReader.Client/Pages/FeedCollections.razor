@@ -4,18 +4,18 @@
 
 
 <SideBar>
-    <FeedMenu />
+    <FeedMenu FeedCollectionId=@Guid.Parse(FeedCollectionId) />
 </SideBar>
 
 <main>
     <h1>@Title</h1>
 
     <div class="feed">
-        @if (FeedEntries is object)
+        @if (Articles is object)
         {
-            foreach (var entry in FeedEntries)
+            foreach (var entry in Articles)
             {
-                <FeedBox FeedEntry=@entry />
+                <FeedBox Article=@entry />
             }
         }
     </div>

@@ -11,7 +11,7 @@ namespace TinfoilFeedReader.Client.Shared.Components.CodeBehinds
     public class FeedBoxComponent : ComponentBase
     {
         [Parameter]
-        public FeedEntry FeedEntry { get; set; }
+        public Article Article { get; set; }
 
         public string ImageData { get; set; }
 
