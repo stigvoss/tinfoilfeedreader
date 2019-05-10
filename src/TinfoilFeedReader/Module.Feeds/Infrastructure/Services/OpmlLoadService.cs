@@ -54,6 +54,7 @@ namespace Module.Feeds.Infrastructure.Services
                 {
                     var feedSource = new FeedSource
                     {
+                        Name = title,
                         Source = new Source
                         {
                             Name = title,

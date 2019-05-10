@@ -51,10 +51,16 @@ namespace Module.Feeds.Tests
             {
                 Assert.That(feedSource.Name, Is.Not.Null);
                 Assert.That(feedSource.Name, Is.Not.Empty);
+
+                Assert.That(feedSource.Source.Name, Is.Not.Null);
+                Assert.That(feedSource.Source.Name, Is.Not.Empty);
             }
 
             Assert.That(feed.FeedSources.Select(fs => fs.Name), Contains.Item(expectedTitle1));
             Assert.That(feed.FeedSources.Select(fs => fs.Name), Contains.Item(expectedTitle2));
+
+            Assert.That(feed.FeedSources.Select(fs => fs.Source.Name), Contains.Item(expectedTitle1));
+            Assert.That(feed.FeedSources.Select(fs => fs.Source.Name), Contains.Item(expectedTitle2));
         }
 
         [Test]

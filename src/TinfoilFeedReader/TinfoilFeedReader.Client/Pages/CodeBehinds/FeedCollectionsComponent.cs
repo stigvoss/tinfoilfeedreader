@@ -11,10 +11,10 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
     public class FeedCollectionsComponent : ComponentBase
     {
         [Parameter]
-        protected string FeedCollectionId { get; set; }
+        protected Guid? FeedCollectionId { get; set; }
 
         [Parameter]
-        protected string FeedId { get; set; }
+        protected Guid? FeedId { get; set; }
 
         [Inject]
         protected HttpClient Http { get; set; }
@@ -29,12 +29,12 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
         {
             if (FeedCollectionId is object)
             {
-                Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId}")
+                Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId.Value}")
                     .ConfigureAwait(false);
 
                 if (FeedId is object)
                 {
-                    Title = Collection?.Feeds?.First(e => e.Id == Guid.Parse(FeedId))?.Name;
+                    Title = Collection?.Feeds?.First(e => e.Id == FeedId.Value)?.Name;
                 }
                 else
                 {
@@ -44,12 +44,12 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
 
             if (FeedCollectionId is object && FeedId is object)
             {
-                Articles = await Http.GetJsonAsync<Article[]>($"api/feedcollections/{FeedCollectionId}/feed/{FeedId}/entries")
+                Articles = await Http.GetJsonAsync<Article[]>($"api/feedcollections/{FeedCollectionId.Value}/feed/{FeedId.Value}/articles")
                     .ConfigureAwait(false);
             }
             else if (FeedCollectionId is object)
             {
-                Articles = await Http.GetJsonAsync<Article[]>($"api/feedcollections/{FeedCollectionId}/entries")
+                Articles = await Http.GetJsonAsync<Article[]>($"api/feedcollections/{FeedCollectionId.Value}/articles")
                     .ConfigureAwait(false);
             }
         }

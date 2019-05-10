@@ -24,18 +24,17 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Source>> All()
+        public IQueryable<Source> All()
         {
-            throw new NotImplementedException();
+            return _context.Sources
+                .Include(source => source.Articles);
         }
 
-        public async Task<IEnumerable<Source>> All(IEnumerable<Guid> ids)
+        public IQueryable<Source> All(IEnumerable<Guid> ids)
         {
-            return await Task.Run(() => 
-                _context.Sources
-                    .Include(source => source.Articles)
-                    .Where(source => ids.Contains(source.Id)))
-                .ConfigureAwait(false);
+            return _context.Sources
+                .Include(source => source.Articles)
+                .Where(source => ids.Contains(source.Id));
         }
 
         public void Dispose()
@@ -52,9 +51,12 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories
             throw new NotImplementedException();
         }
 
-        public Task Update(Source item)
+        public async Task Update(Source item)
         {
-            throw new NotImplementedException();
+            _context.Entry(item).State = EntityState.Modified;
+            _context.Sources.Update(item);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

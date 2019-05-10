@@ -1,6 +1,7 @@
 ﻿using Module.Feeds.Domain.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace Module.Feeds.Domain.Base
     public interface IRepository<T> : IDisposable
         where T : IAggregateRoot<T>
     {
-        Task<IEnumerable<T>> All();
+        IQueryable<T> All();
 
         Task<T> Single(Guid id);
 

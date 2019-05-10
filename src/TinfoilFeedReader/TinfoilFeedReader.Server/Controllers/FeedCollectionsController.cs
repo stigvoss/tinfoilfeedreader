@@ -28,26 +28,30 @@ namespace TinfoilFeedReader.Server.Controllers
             return await _collections.Single(id);
         }
 
-        [HttpGet("{id}/entries")]
-        public async Task<IEnumerable<Article>> GetEntries(Guid id)
+        [HttpGet("{id}/articles")]
+        public async Task<IEnumerable<Article>> GetArticles(Guid id)
         {
             var collection = await _collections.Single(id);
             var sources = collection.Feeds
                 .SelectMany(feed => feed.FeedSources
-                        .Select(feedSource => feedSource.Source.Id));
+                    .Select(feedSource => feedSource.Source.Id));
 
-            return (await _sources.All(sources)).SelectMany(source => source.Articles);
+            return _sources.All(sources)
+                .SelectMany(source => source.Articles);
         }
 
-        [HttpGet("{id}/feed/{feedId}/entries")]
-        public async Task<IEnumerable<Article>> GetFeedEntries(Guid id, Guid feedId)
+        [HttpGet("{id}/feed/{feedId}/articles")]
+        public async Task<IEnumerable<Article>> GetArticles(Guid id, Guid feedId)
         {
-            var feed = (await _collections.Single(id))?.Feeds
+            var collection = await _collections.Single(id);
+            var feed = collection?.Feeds
                 .FirstOrDefault(e => e.Id == feedId);
 
-            var sources = feed.FeedSources.Select(feedSource => feedSource.Source.Id);
+            var sources = feed.FeedSources
+                .Select(feedSource => feedSource.Source.Id);
 
-            return (await _sources.All(sources)).SelectMany(source => source.Articles);
+            return _sources.All(sources)
+                .SelectMany(source => source.Articles);
         }
 
         [HttpPut]

@@ -1,10 +1,10 @@
-﻿@page "/feedcollections/{FeedCollectionId}"
-@page "/feedcollections/{FeedCollectionId}/feed/{FeedId}"
+﻿@page "/feedcollections/{FeedCollectionId:guid}"
+@page "/feedcollections/{FeedCollectionId:guid}/feed/{FeedId:guid}"
 @inherits TinfoilFeedReader.Client.Pages.CodeBehinds.FeedCollectionsComponent
 
 
 <SideBar>
-    <FeedMenu FeedCollectionId=@Guid.Parse(FeedCollectionId) />
+    <FeedMenu FeedCollectionId=@FeedCollectionId />
 </SideBar>
 
 <main>
@@ -13,9 +13,9 @@
     <div class="feed">
         @if (Articles is object)
         {
-            foreach (var entry in Articles)
+            foreach (var article in Articles.OrderByDescending(article => article.PublishDate))
             {
-                <FeedBox Article=@entry />
+                <FeedBox Article=@article />
             }
         }
     </div>

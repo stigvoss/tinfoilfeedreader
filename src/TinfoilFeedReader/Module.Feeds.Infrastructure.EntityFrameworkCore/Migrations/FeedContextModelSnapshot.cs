@@ -135,8 +135,6 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
 
                             b1.Property<string>("Name");
 
-                            b1.Property<int>("SequenceIndex");
-
                             b1.Property<Guid?>("SourceId");
 
                             b1.HasKey("FeedId", "Id");
@@ -157,21 +155,18 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
                                 {
                                     FeedId = new Guid("bfdfb55d-8887-41a5-b37c-e7fcfcc2a83e"),
                                     Id = 1,
-                                    SequenceIndex = 1,
                                     SourceId = new Guid("6f6ccd9c-f5b1-4f7f-99cf-601da1276cab")
                                 },
                                 new
                                 {
                                     FeedId = new Guid("bfdfb55d-8887-41a5-b37c-e7fcfcc2a83e"),
                                     Id = 2,
-                                    SequenceIndex = 2,
                                     SourceId = new Guid("7f0e8887-a73a-4a97-b32e-27bf2825d08a")
                                 },
                                 new
                                 {
                                     FeedId = new Guid("d0867b47-0db5-446e-99e0-5f66674f4ad1"),
                                     Id = 3,
-                                    SequenceIndex = 1,
                                     SourceId = new Guid("ff5a433a-2425-4711-85b9-05e4dd86a4de")
                                 });
                         });
@@ -190,8 +185,6 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
                             b1.Property<string>("ImageUrl");
 
                             b1.Property<DateTimeOffset>("PublishDate");
-
-                            b1.Property<string>("SourceName");
 
                             b1.Property<string>("Summary");
 

@@ -26,7 +26,7 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories
                 .ConfigureAwait(false);
         }
 
-        public Task<IEnumerable<FeedCollection>> All()
+        public IQueryable<FeedCollection> All()
         {
             throw new NotSupportedException();
         }
@@ -50,8 +50,7 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories
                 .Include(collection => collection.Feeds)
                     .ThenInclude(feed => feed.FeedSources)
                         .ThenInclude(feedSource => feedSource.Source)
-                .SingleOrDefaultAsync(e => e.Id == id)
-                .ConfigureAwait(false);
+                .SingleOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task Update(FeedCollection item)

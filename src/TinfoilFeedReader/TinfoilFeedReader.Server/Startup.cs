@@ -9,6 +9,7 @@ using Module.Feeds.Domain.Base;
 using Module.Feeds.Infrastructure.EntityFrameworkCore;
 using Module.Feeds.Infrastructure.EntityFrameworkCore.Base;
 using Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Data.SqlClient;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace TinfoilFeedReader.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc().AddNewtonsoftJson(options => 
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddResponseCompression(opts =>
             {
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(

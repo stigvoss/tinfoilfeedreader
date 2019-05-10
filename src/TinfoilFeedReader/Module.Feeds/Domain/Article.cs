@@ -40,7 +40,6 @@ namespace Module.Feeds.Domain
         public string Summary { get; set; }
 
         public string ImageUrl { get; set; }
-        public string SourceName { get; internal set; }
 
         public static explicit operator Article(SyndicationItem item)
             => new Article
