@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Base
 {
-    public interface ISourceRepository
+    public interface ISourcesRepository
         : IRepository<Source>
     {
         IQueryable<Source> All(IEnumerable<Guid> ids);

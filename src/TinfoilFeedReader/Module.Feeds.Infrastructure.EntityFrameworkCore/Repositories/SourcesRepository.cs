@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories
 {
-    public class SourceRepository : ISourceRepository
+    public class SourcesRepository : ISourcesRepository
     {
         private readonly FeedContext _context;
 
-        public SourceRepository(FeedContext context)
+        public SourcesRepository(FeedContext context)
         {
             _context = context;
         }

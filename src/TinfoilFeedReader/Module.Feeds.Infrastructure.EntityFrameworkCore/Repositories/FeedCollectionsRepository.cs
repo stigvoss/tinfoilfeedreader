@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories
 {
-    public class FeedCollectionRepository : IRepository<FeedCollection>
+    public class FeedCollectionsRepository : IRepository<FeedCollection>
     {
         private readonly FeedContext _context;
 
-        public FeedCollectionRepository(FeedContext context)
+        public FeedCollectionsRepository(FeedContext context)
         {
             _context = context;
         }

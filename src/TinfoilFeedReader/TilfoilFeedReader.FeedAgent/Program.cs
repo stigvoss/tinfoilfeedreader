@@ -27,7 +27,7 @@ namespace TilfoilFeedReader.FeedAgent
             optionsBuilder.UseSqlServer(builder.ConnectionString);
 
             var context = new FeedContext(optionsBuilder.Options);
-            var sources = new SourceRepository(context);
+            var sources = new SourcesRepository(context);
 
             foreach (var source in await sources.All().ToListAsync())
             {

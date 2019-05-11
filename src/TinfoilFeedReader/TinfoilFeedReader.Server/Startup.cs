@@ -22,7 +22,7 @@ namespace TinfoilFeedReader.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddNewtonsoftJson(options => 
+            services.AddMvc().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddResponseCompression(opts =>
             {
@@ -38,9 +38,11 @@ namespace TinfoilFeedReader.Server
                 InitialCatalog = "Tinfoil"
             };
 
-            services.AddDbContext<FeedContext>(options => options.UseSqlServer(builder.ConnectionString));
-            services.AddScoped<IRepository<FeedCollection>, FeedCollectionRepository>();
-            services.AddScoped<ISourceRepository, SourceRepository>();
+            services.AddResponseCaching();
+            services.AddDbContextPool<FeedContext>(options =>
+                options.UseSqlServer(builder.ConnectionString));
+            services.AddScoped<IRepository<FeedCollection>, FeedCollectionsRepository>();
+            services.AddScoped<ISourcesRepository, SourcesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

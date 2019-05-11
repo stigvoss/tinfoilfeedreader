@@ -15,6 +15,8 @@ namespace Module.Feeds.Domain
 
         public DateTimeOffset PublishDate { get; set; }
 
+        public DateTimeOffset LastUpdatedDate { get; set; }
+
         public Source Source { get; set; }
 
         public string TimeSincePublish()
@@ -45,10 +47,11 @@ namespace Module.Feeds.Domain
             => new Article
             {
                 Title = item.Title?.Text,
-                Url = item.Links?.FirstOrDefault().Uri.AbsoluteUri,
+                Url = item.Links?.FirstOrDefault()?.Uri.AbsoluteUri,
                 PublishDate = item.PublishDate,
                 Summary = item.Summary?.Text,
-                ImageUrl = ContentService.ReadImageUrl(item.Content)
+                ImageUrl = ContentService.ReadImageUrl(item.Content),
+                LastUpdatedDate = item.LastUpdatedTime
             };
     }
 }

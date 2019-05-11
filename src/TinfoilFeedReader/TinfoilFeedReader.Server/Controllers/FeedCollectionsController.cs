@@ -14,9 +14,11 @@ namespace TinfoilFeedReader.Server.Controllers
     public class FeedCollectionsController : Controller
     {
         private readonly IRepository<FeedCollection> _collections;
-        private readonly ISourceRepository _sources;
+        private readonly ISourcesRepository _sources;
 
-        public FeedCollectionsController(IRepository<FeedCollection> collections, ISourceRepository sources)
+        public FeedCollectionsController(
+            IRepository<FeedCollection> collections,
+            ISourcesRepository sources)
         {
             _collections = collections;
             _sources = sources;

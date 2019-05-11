@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Module.Feeds.Infrastructure.EntityFrameworkCore;
 
 namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(FeedContext))]
-    partial class FeedContextModelSnapshot : ModelSnapshot
+    [Migration("20190511093359_ArticleUpdatedDate")]
+    partial class ArticleUpdatedDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
