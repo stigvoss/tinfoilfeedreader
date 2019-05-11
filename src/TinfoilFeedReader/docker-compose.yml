@@ -1,0 +1,52 @@
+version: '3.4'
+
+services:
+  app:
+    image: tinfoil-app:latest
+    build:
+      context: .
+      dockerfile: TinfoilFeedReader.Server/Dockerfile
+    environment:
+     - VIRTUAL_HOST=dock02.voss.net
+    networks:
+     - proxy
+     - backend
+    depends_on:
+     - db
+
+  agent:
+    image: tinfoil-agent:latest
+    build:
+      context: .
+      dockerfile: TinfoilFeedReader.Agent/Dockerfile
+    networks:
+     - backend
+    depends_on:
+     - app
+
+  db:
+    image: postgres:latest
+    environment:
+     - POSTGRES_DB=tinfoil
+     - POSTGRES_PASSWORD=DevelopmentPassword01!
+    volumes:
+     - db-data:/var/lib/postgresql/data
+    networks:
+     - backend
+
+  proxy:
+    image: jwilder/nginx-proxy
+    ports:
+     - 80:80
+     - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+     - proxy
+
+networks:
+  proxy:
+  backend:
+
+volumes:
+  db-data:
