@@ -2,9 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Module.Feeds.Infrastructure.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
 {
@@ -15,9 +15,9 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.0.0-preview5.19227.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Module.Feeds.Domain.Feed", b =>
                 {
@@ -130,8 +130,7 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
                             b1.Property<Guid>("FeedId");
 
                             b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .ValueGeneratedOnAdd();
 
                             b1.Property<string>("Name");
 
@@ -179,8 +178,7 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
                             b1.Property<Guid>("SourceId");
 
                             b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .ValueGeneratedOnAdd();
 
                             b1.Property<string>("ImageUrl");
 

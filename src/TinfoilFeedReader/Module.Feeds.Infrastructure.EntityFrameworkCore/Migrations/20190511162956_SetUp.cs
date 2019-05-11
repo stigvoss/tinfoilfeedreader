@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
 {
@@ -58,10 +58,11 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
                 {
                     SourceId = table.Column<Guid>(nullable: false),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true),
                     PublishDate = table.Column<DateTimeOffset>(nullable: false),
+                    LastUpdatedDate = table.Column<DateTimeOffset>(nullable: false),
                     Summary = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(nullable: true)
                 },
@@ -82,7 +83,7 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
                 {
                     FeedId = table.Column<Guid>(nullable: false),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     SourceId = table.Column<Guid>(nullable: true)
                 },
@@ -132,17 +133,12 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
             migrationBuilder.InsertData(
                 table: "FeedSource",
                 columns: new[] { "FeedId", "Id", "Name", "SourceId" },
-                values: new object[] { new Guid("bfdfb55d-8887-41a5-b37c-e7fcfcc2a83e"), 1, null, new Guid("6f6ccd9c-f5b1-4f7f-99cf-601da1276cab") });
-
-            migrationBuilder.InsertData(
-                table: "FeedSource",
-                columns: new[] { "FeedId", "Id", "Name", "SourceId" },
-                values: new object[] { new Guid("bfdfb55d-8887-41a5-b37c-e7fcfcc2a83e"), 2, null, new Guid("7f0e8887-a73a-4a97-b32e-27bf2825d08a") });
-
-            migrationBuilder.InsertData(
-                table: "FeedSource",
-                columns: new[] { "FeedId", "Id", "Name", "SourceId" },
-                values: new object[] { new Guid("d0867b47-0db5-446e-99e0-5f66674f4ad1"), 3, null, new Guid("ff5a433a-2425-4711-85b9-05e4dd86a4de") });
+                values: new object[,]
+                {
+                    { new Guid("bfdfb55d-8887-41a5-b37c-e7fcfcc2a83e"), 1, null, new Guid("6f6ccd9c-f5b1-4f7f-99cf-601da1276cab") },
+                    { new Guid("bfdfb55d-8887-41a5-b37c-e7fcfcc2a83e"), 2, null, new Guid("7f0e8887-a73a-4a97-b32e-27bf2825d08a") },
+                    { new Guid("d0867b47-0db5-446e-99e0-5f66674f4ad1"), 3, null, new Guid("ff5a433a-2425-4711-85b9-05e4dd86a4de") }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feed_FeedCollectionId",

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Module.Feeds.Domain;
 using System;
 using System.Collections.Generic;
-
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 namespace Module.Feeds.Infrastructure.EntityFrameworkCore
 {
     public class FeedContext : DbContext
@@ -17,6 +17,8 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ForNpgsqlUseIdentityColumns();
+
             modelBuilder.Entity<FeedCollection>()
                 .ToTable("FeedCollection")
                 .HasKey(feedCollection => feedCollection.Id);
@@ -100,7 +102,7 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore
                 });
 
             modelBuilder.Entity<Feed>()
-                .OwnsMany(e => e.FeedSources, feedSource =>
+                .OwnsMany(feed => feed.FeedSources, feedSource =>
                 {
                     feedSource.HasOne(e => e.Source)
                         .WithMany();

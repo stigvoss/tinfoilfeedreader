@@ -12,7 +12,7 @@ namespace Module.Feeds.Infrastructure.Services
 {
     public static class FeedLoader
     {
-        public static async Task<IEnumerable<Article>> ArticlesFrom(Source source)
+        public static async Task<ICollection<Article>> ArticlesFrom(Source source)
         {
             var articles = new List<Article>();
 
