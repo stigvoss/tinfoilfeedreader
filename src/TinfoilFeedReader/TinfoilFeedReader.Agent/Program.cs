@@ -22,15 +22,16 @@ namespace TilfoilFeedReader.FeedAgent
         static async Task Main(string[] args)
         {
             var builder = new HostBuilder()
-                .ConfigureAppConfiguration(config => config
+                .ConfigureAppConfiguration(configuration => configuration
                     .AddCommandLine(args)
                     .AddJsonFile("appsettings.json")
+                    .AddEnvironmentVariables("APP_")
                     .Build())
+                .ConfigureHostConfiguration(configuration => configuration
+                    .AddEnvironmentVariables("HOST_"))
                 .ConfigureServices((context, services) =>
                 {
-                    var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
-
-                    services.AddOptions();
+                    var connectionString = GetConnectionString(context.Configuration);
 
                     services.AddDbContextPool<FeedContext>(options => options.UseNpgsql(connectionString));
                     services.AddScoped<ISourcesRepository, SourcesRepository>();
@@ -41,6 +42,17 @@ namespace TilfoilFeedReader.FeedAgent
             await builder.RunConsoleAsync();
         }
 
+        private static string GetConnectionString(IConfiguration configuration)
+        {
+            return new NpgsqlConnectionStringBuilder
+            {
+                Host = configuration.GetValue<string>("DB_HOST"),
+                Port = configuration.GetValue<int>("DB_PORT"),
+                Username = configuration.GetValue<string>("DB_USER"),
+                Password = configuration.GetValue<string>("DB_PASSWORD")
+            }.ConnectionString;
+        }
+
         class FeedUpdateAgent : IHostedService
         {
             private readonly ISourcesRepository _sources;
@@ -48,12 +60,16 @@ namespace TilfoilFeedReader.FeedAgent
             private readonly CancellationTokenSource _cancellationTokenSource;
             private Task _scheduler;
 
-            public FeedUpdateAgent(ISourcesRepository sources, ILogger<FeedUpdateAgent> logger)
+            public FeedUpdateAgent(
+                ISourcesRepository sources,
+                ILogger<FeedUpdateAgent> logger)
             {
                 _sources = sources;
                 _logger = logger;
                 _cancellationTokenSource = new CancellationTokenSource();
             }
+
+            public IHostingEnvironment Environment { get; }
 
             public Task StartAsync(CancellationToken cancellationToken)
             {

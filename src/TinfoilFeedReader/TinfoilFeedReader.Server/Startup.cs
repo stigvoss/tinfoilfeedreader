@@ -11,6 +11,7 @@ using Module.Feeds.Infrastructure.EntityFrameworkCore;
 using Module.Feeds.Infrastructure.EntityFrameworkCore.Base;
 using Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories;
 using Newtonsoft.Json;
+using Npgsql;
 using System.Linq;
 
 namespace TinfoilFeedReader.Server
@@ -18,10 +19,13 @@ namespace TinfoilFeedReader.Server
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration,
+            IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -34,13 +38,24 @@ namespace TinfoilFeedReader.Server
                     new[] { "application/octet-stream" });
             });
 
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-            services.AddResponseCaching();
+            var connectionString = GetConnectionString(Configuration);
 
             services.AddDbContextPool<FeedContext>(options => options.UseNpgsql(connectionString));
             services.AddScoped<IRepository<FeedCollection>, FeedCollectionsRepository>();
             services.AddScoped<ISourcesRepository, SourcesRepository>();
+
+            services.AddResponseCaching();
+        }
+
+        private string GetConnectionString(IConfiguration configuration)
+        {
+            return new NpgsqlConnectionStringBuilder
+            {
+                Host = configuration.GetValue<string>("DB_HOST"),
+                Port = configuration.GetValue<int>("DB_PORT"),
+                Username = configuration.GetValue<string>("DB_USER"),
+                Password = configuration.GetValue<string>("DB_PASSWORD")
+            }.ConnectionString;
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
