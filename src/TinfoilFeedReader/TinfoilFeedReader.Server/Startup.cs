@@ -11,9 +11,6 @@ using Module.Feeds.Infrastructure.EntityFrameworkCore;
 using Module.Feeds.Infrastructure.EntityFrameworkCore.Base;
 using Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Npgsql;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace TinfoilFeedReader.Server
@@ -27,8 +24,6 @@ namespace TinfoilFeedReader.Server
             Configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddNewtonsoftJson(options =>
@@ -39,14 +34,15 @@ namespace TinfoilFeedReader.Server
                     new[] { "application/octet-stream" });
             });
 
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+
             services.AddResponseCaching();
-            services.AddDbContextPool<FeedContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContextPool<FeedContext>(options => options.UseNpgsql(connectionString));
             services.AddScoped<IRepository<FeedCollection>, FeedCollectionsRepository>();
             services.AddScoped<ISourcesRepository, SourcesRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
