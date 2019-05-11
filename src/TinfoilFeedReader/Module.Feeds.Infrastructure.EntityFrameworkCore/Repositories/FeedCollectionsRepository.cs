@@ -37,11 +37,9 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories
 
         public async Task Remove(FeedCollection item)
         {
-            await Task.Run(() =>
-            {
-                _context.Collections.Remove(item);
-                _context.SaveChanges();
-            }).ConfigureAwait(false);
+            _context.Collections.Remove(item);
+            await _context.SaveChangesAsync()
+                .ConfigureAwait(false);
         }
 
         public async Task<FeedCollection> Single(Guid id)
@@ -55,11 +53,9 @@ namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories
 
         public async Task Update(FeedCollection item)
         {
-            await Task.Run(() =>
-            {
-                _context.Collections.Update(item);
-                _context.SaveChanges();
-            }).ConfigureAwait(false);
+            _context.Collections.Update(item);
+            await _context.SaveChangesAsync()
+                .ConfigureAwait(false);
         }
     }
 }
