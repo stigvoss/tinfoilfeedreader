@@ -1,7 +1,5 @@
 ﻿@import "DarkTheme.scss";
 
-$feed-box-width: 20vw;
-
 * {
     padding: 0;
     margin: 0;
@@ -9,6 +7,8 @@ $feed-box-width: 20vw;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-decoration: none;
 }
+
+@import "NativeHtmlComponents.scss";
 
 body {
     line-height: 1.5;
@@ -43,41 +43,12 @@ app {
         align-items: stretch;
         height: calc(100vh - 3.25rem);
 
-        nav.sidebar {
-            position: fixed;
-            top: 3.25rem;
-            left: 0;
-            bottom: 0;
-            width: 256px;
-            background-color: $sidebar-background-color;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-
-            & > h6 {
-                text-transform: uppercase;
-                color: darkgrey;
-                font-weight: 400;
-                font-size: 0.7rem;
-                margin: 1.5rem 0 0.25rem 0;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            li {
-                font-size: 1rem;
-                font-weight: 200;
-                list-style: none;
-
-                a {
-                    color: inherit;
-                }
-            }
-        }
+        @import "SideBar.scss";
 
         main {
             margin-left: 256px;
             padding: 3rem 6rem 3rem 6rem;
+            width: 100%;
 
             h1 {
                 padding-bottom: 4rem;
@@ -85,48 +56,8 @@ app {
                 font-weight: 400;
             }
 
-            .feed {
-                display: flex;
-                align-items: flex-start;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                margin-left: -0.5rem;
-                margin-right: -0.5rem;
-
-                .feed-box {
-                    display: inline-block;
-                    padding: 0.25rem;
-                    margin: 0.25rem 0.25rem 1rem 0.25rem;
-                    width: calc(0.5rem + #{$feed-box-width});
-
-                    .image {
-                        width: $feed-box-width;
-                        height: calc(#{$feed-box-width} * 2 / 3);
-                        background-color: darkgrey;
-                        margin-bottom: 0.5rem;
-                        border-radius: 3px;
-                        border: 1px solid lightgrey;
-                        overflow: hidden;
-
-                        img {
-                            width: 100%;
-                            height: auto;
-                        }
-                    }
-
-                    a {
-                        color: inherit;
-                    }
-
-                    em {
-                        font-size: 0.75rem;
-                    }
-
-                    p {
-                        font-size: 0.8rem;
-                    }
-                }
-            }
+            @import "ManageFeed.scss";
+            @import "Feed.scss";
         }
     }
 }

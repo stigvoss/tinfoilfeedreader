@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TinfoilFeedReader.Client.Pages.CodeBehinds
 {
-    public class ManageFeedCollectionsComponent : ComponentBase
+    public class ManageFeedCollectionsPage : ComponentBase
     {
         [Inject]
         public HttpClient Http { get; set; }
@@ -18,7 +18,7 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
 
         public FeedCollection Collection { get; set; }
 
-        protected override async Task OnInitAsync()
+        protected override async Task OnParametersSetAsync()
         {
             Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId.Value}")
                     .ConfigureAwait(false);

@@ -1,0 +1,38 @@
+﻿@page "/feedcollections/{FeedCollectionId:guid}/manage/{FeedId:guid}"
+@inherits TinfoilFeedReader.Client.Pages.CodeBehinds.ManageFeedPage
+
+
+<SideBar>
+    <FeedMenu FeedCollectionId=@FeedCollectionId />
+</SideBar>
+
+<main>
+    <h1>Manage Feed</h1>
+
+    @if (Feed is object)
+    {
+    <div class="manage-feed">
+        <div class="label">
+            <label>
+                Title
+            </label>
+            <a onclick=@ToggleEdit>
+                @if (!IsEditing)
+                {
+                <span class="oi edit" data-glyph="pencil"></span>
+                }
+                else
+                {
+                <span class="oi edit done" data-glyph="check"></span>
+                }
+            </a>
+        </div>
+        <div class="input">
+            <input disabled=@(!IsEditing) bind="@Feed.Name" />
+        </div>
+        <div class="sources">
+            <h2>Sources</h2>
+        </div>
+    </div>
+    }
+</main>

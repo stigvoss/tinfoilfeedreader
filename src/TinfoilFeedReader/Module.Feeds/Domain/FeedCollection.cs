@@ -16,6 +16,6 @@ namespace Module.Feeds.Domain
             : base(id)
         { }
 
-        public virtual ICollection<Feed> Feeds { get; set; } = new List<Feed>();
+        public virtual List<Feed> Feeds { get; set; } = new List<Feed>();
     }
 }

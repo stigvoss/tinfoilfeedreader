@@ -1,0 +1,25 @@
+﻿input {
+    border: 1px solid lightgrey;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    width: 100%;
+}
+
+button {
+    border: 1px solid grey;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    background-color: lightgrey;
+}
+
+a {
+    color: lightgrey;
+}
+
+a:hover {
+    color: darkgrey;
+}
+
+a:visited {
+    color: lightgrey;
+}

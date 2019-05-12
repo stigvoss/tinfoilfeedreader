@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Module.Feeds.Domain;
 using Module.Feeds.Domain.Base;
+using Module.Feeds.Infrastructure.EntityFrameworkCore;
 using Module.Feeds.Infrastructure.EntityFrameworkCore.Base;
 using Module.Feeds.Infrastructure.Services;
 
@@ -15,13 +16,16 @@ namespace TinfoilFeedReader.Server.Controllers
     {
         private readonly IRepository<FeedCollection> _collections;
         private readonly ISourcesRepository _sources;
+        private readonly EntityReplaceService _updateService;
 
         public FeedCollectionsController(
             IRepository<FeedCollection> collections,
-            ISourcesRepository sources)
+            ISourcesRepository sources,
+            EntityReplaceService updateService)
         {
             _collections = collections;
             _sources = sources;
+            _updateService = updateService;
         }
 
         [HttpGet("{id}")]
@@ -59,6 +63,17 @@ namespace TinfoilFeedReader.Server.Controllers
         [HttpPut]
         public async Task Put([FromBody]FeedCollection collection)
         {
+            await _collections.Update(collection);
+        }
+
+        [HttpPut("{id}/feed")]
+        public async Task PutFeed([FromBody]Feed feed, [FromRoute] Guid id)
+        {
+            var collection = await _collections.Single(id);
+            var existing = collection.Feeds.Single(f => f.Id == feed.Id);
+
+            _updateService.Replace(existing, feed);
+
             await _collections.Update(collection);
         }
 

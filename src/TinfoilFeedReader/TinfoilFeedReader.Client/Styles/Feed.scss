@@ -1,0 +1,44 @@
+﻿$feed-box-width: 20vw;
+
+.feed {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+
+    .feed-box {
+        display: inline-block;
+        padding: 0.25rem;
+        margin: 0.25rem 0.25rem 1rem 0.25rem;
+        width: calc(0.5rem + #{$feed-box-width});
+
+        .image {
+            width: $feed-box-width;
+            height: calc(#{$feed-box-width} * 2 / 3);
+            background-color: darkgrey;
+            margin-bottom: 0.5rem;
+            border-radius: 3px;
+            border: 1px solid lightgrey;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        a {
+            color: inherit;
+        }
+
+        em {
+            font-size: 0.75rem;
+        }
+
+        p {
+            font-size: 0.8rem;
+        }
+    }
+}

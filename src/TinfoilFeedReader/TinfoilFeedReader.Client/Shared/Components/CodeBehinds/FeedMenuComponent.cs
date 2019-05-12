@@ -22,7 +22,8 @@ namespace TinfoilFeedReader.Client.Shared.Components.CodeBehinds
         {
             if (FeedCollectionId is object)
             {
-                Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId}");
+                Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId}")
+                    .ConfigureAwait(false);
             }
         }
     }

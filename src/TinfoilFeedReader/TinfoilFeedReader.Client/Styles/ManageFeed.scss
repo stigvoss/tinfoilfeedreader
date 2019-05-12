@@ -1,0 +1,21 @@
+﻿.manage-feed {
+    padding-bottom: 3rem;
+
+    .label {
+        display: flex;
+        justify-content: space-between;
+
+        .edit {
+            font-size: 0.75rem;
+        }
+
+        .done {
+            color: lawngreen;
+        }
+    }
+
+    .input {
+        padding-top: 0.5rem;
+        padding-bottom: 3rem;
+    }
+}

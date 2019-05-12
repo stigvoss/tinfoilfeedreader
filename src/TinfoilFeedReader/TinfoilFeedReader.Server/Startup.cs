@@ -41,6 +41,7 @@ namespace TinfoilFeedReader.Server
             var connectionString = GetConnectionString(Configuration);
 
             services.AddDbContextPool<FeedContext>(options => options.UseNpgsql(connectionString));
+            services.AddScoped<EntityReplaceService>();
             services.AddScoped<IRepository<FeedCollection>, FeedCollectionsRepository>();
             services.AddScoped<ISourcesRepository, SourcesRepository>();
 

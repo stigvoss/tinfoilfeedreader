@@ -1,0 +1,144 @@
+﻿* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none; }
+
+input {
+  border: 1px solid lightgrey;
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  width: 100%; }
+
+button {
+  border: 1px solid grey;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  background-color: lightgrey; }
+
+a {
+  color: lightgrey; }
+
+a:hover {
+  color: darkgrey; }
+
+a:visited {
+  color: lightgrey; }
+
+body {
+  line-height: 1.5;
+  background-color: #333;
+  color: #eee; }
+
+app {
+  height: 100vh; }
+  app nav.top-menu {
+    background-color: #343a40;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    z-index: 999; }
+    app nav.top-menu .brand {
+      color: white;
+      text-decoration: none;
+      font-size: 1.25rem;
+      padding: 0.75rem 0 0.75rem 0.75rem;
+      display: inline-block; }
+  app > div {
+    display: flex;
+    margin-top: 3.25rem;
+    align-items: stretch;
+    height: calc(100vh - 3.25rem); }
+    app > div nav.sidebar {
+      position: fixed;
+      top: 3.25rem;
+      left: 0;
+      bottom: 0;
+      width: 256px;
+      background-color: #222;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1); }
+      app > div nav.sidebar > h6 {
+        text-transform: uppercase;
+        color: darkgrey;
+        font-weight: 400;
+        font-size: 0.7rem;
+        margin: 1.5rem 0 0.25rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        app > div nav.sidebar > h6 a {
+          color: #333; }
+          app > div nav.sidebar > h6 a:hover {
+            color: #ddd; }
+      app > div nav.sidebar li {
+        font-size: 1rem;
+        font-weight: 200;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        app > div nav.sidebar li a {
+          color: inherit; }
+        app > div nav.sidebar li .edit {
+          font-size: 0.75rem;
+          display: none; }
+        app > div nav.sidebar li:hover .edit {
+          display: initial;
+          color: #333; }
+          app > div nav.sidebar li:hover .edit:hover {
+            color: #ddd; }
+    app > div main {
+      margin-left: 256px;
+      padding: 3rem 6rem 3rem 6rem;
+      width: 100%; }
+      app > div main h1 {
+        padding-bottom: 4rem;
+        font-size: 2.5rem;
+        font-weight: 400; }
+      app > div main .manage-feed {
+        padding-bottom: 3rem; }
+        app > div main .manage-feed .label {
+          display: flex;
+          justify-content: space-between; }
+          app > div main .manage-feed .label .edit {
+            font-size: 0.75rem; }
+          app > div main .manage-feed .label .done {
+            color: lawngreen; }
+        app > div main .manage-feed .input {
+          padding-top: 0.5rem;
+          padding-bottom: 3rem; }
+      app > div main .feed {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-left: -0.5rem;
+        margin-right: -0.5rem; }
+        app > div main .feed .feed-box {
+          display: inline-block;
+          padding: 0.25rem;
+          margin: 0.25rem 0.25rem 1rem 0.25rem;
+          width: calc(0.5rem + 20vw); }
+          app > div main .feed .feed-box .image {
+            width: 20vw;
+            height: calc(20vw * 2 / 3);
+            background-color: darkgrey;
+            margin-bottom: 0.5rem;
+            border-radius: 3px;
+            border: 1px solid lightgrey;
+            overflow: hidden; }
+            app > div main .feed .feed-box .image img {
+              width: 100%;
+              height: auto; }
+          app > div main .feed .feed-box a {
+            color: inherit; }
+          app > div main .feed .feed-box em {
+            font-size: 0.75rem; }
+          app > div main .feed .feed-box p {
+            font-size: 0.8rem; }
+
+/*# sourceMappingURL=data:application/json;base64,ewoJInZlcnNpb24iOiAzLAoJImZpbGUiOiAiU3R5bGVzL0FwcC5jc3MiLAoJInNvdXJjZXMiOiBbCgkJIlN0eWxlcy9BcHAuc2NzcyIsCgkJIlN0eWxlcy9EYXJrVGhlbWUuc2NzcyIsCgkJIlN0eWxlcy9OYXRpdmVIdG1sQ29tcG9uZW50cy5zY3NzIiwKCQkiU3R5bGVzL1NpZGVCYXIuc2NzcyIsCgkJIlN0eWxlcy9NYW5hZ2VGZWVkLnNjc3MiLAoJCSJTdHlsZXMvRmVlZC5zY3NzIgoJXSwKCSJuYW1lcyI6IFtdLAoJIm1hcHBpbmdzIjogIkFBRUEsQUFBQSxDQUFDLENBQUM7RUFDRSxPQUFPLEVBQUUsQ0FBQztFQUNWLE1BQU0sRUFBRSxDQUFDO0VBQ1QsVUFBVSxFQUFFLFVBQVU7RUFDdEIsV0FBVyxFQUFFLCtDQUErQztFQUM1RCxlQUFlLEVBQUUsSUFBSSxHQUN4Qjs7QUVSRCxBQUFBLEtBQUssQ0FBQztFQUNGLE1BQU0sRUFBRSxtQkFBbUI7RUFDM0IsYUFBYSxFQUFFLE9BQU87RUFDdEIsT0FBTyxFQUFFLE9BQU87RUFDaEIsS0FBSyxFQUFFLElBQUksR0FDZDs7QUFFRCxBQUFBLE1BQU0sQ0FBQztFQUNILE1BQU0sRUFBRSxjQUFjO0VBQ3RCLGFBQWEsRUFBRSxPQUFPO0VBQ3RCLE9BQU8sRUFBRSx1QkFBdUI7RUFDaEMsZ0JBQWdCLEVBQUUsU0FBUyxHQUM5Qjs7QUFFRCxBQUFBLENBQUMsQ0FBQztFQUNFLEtBQUssRUFBRSxTQUFTLEdBQ25COztBQUVELEFBQUEsQ0FBQyxBQUFBLE1BQU0sQ0FBQztFQUNKLEtBQUssRUFBRSxRQUFRLEdBQ2xCOztBQUVELEFBQUEsQ0FBQyxBQUFBLFFBQVEsQ0FBQztFQUNOLEtBQUssRUFBRSxTQUFTLEdBQ25COztBRlpELEFBQUEsSUFBSSxDQUFDO0VBQ0QsV0FBVyxFQUFFLEdBQUc7RUFDaEIsZ0JBQWdCLEVDZEQsSUFBSTtFRGVuQixLQUFLLEVDYkksSUFBSSxHRGNoQjs7QUFFRCxBQUFBLEdBQUcsQ0FBQztFQUNBLE1BQU0sRUFBRSxLQUFLLEdB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 */

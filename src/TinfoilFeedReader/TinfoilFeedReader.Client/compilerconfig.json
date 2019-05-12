@@ -1,6 +1,6 @@
 [
   {
-    "outputFile": "wwwroot/assets/app.css",
+    "outputFile": "wwwroot/assets/styles/app.css",
     "inputFile": "Styles/App.scss",
     "minify": {
       "enabled": true
