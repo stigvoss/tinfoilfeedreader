@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Module.Feeds.Infrastructure.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(FeedContext))]
-    partial class FeedContextModelSnapshot : ModelSnapshot
+    [Migration("20190512173456_RemoveCircularReferenceFromSourceAndArticle")]
+    partial class RemoveCircularReferenceFromSourceAndArticle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -17,8 +17,6 @@ namespace Module.Feeds.Domain
 
         public DateTimeOffset LastUpdatedDate { get; set; }
 
-        public Source Source { get; set; }
-
         public string TimeSincePublish()
         {
             var timeSince = DateTime.Now - PublishDate.LocalDateTime;

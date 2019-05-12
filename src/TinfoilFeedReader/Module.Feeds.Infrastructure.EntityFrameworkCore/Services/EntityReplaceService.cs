@@ -1,11 +1,12 @@
 ﻿using Module.Feeds.Domain.Base;
+using Module.Feeds.Infrastructure.EntityFrameworkCore.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Module.Feeds.Infrastructure.EntityFrameworkCore
+namespace Module.Feeds.Infrastructure.EntityFrameworkCore.Services
 {
-    public class EntityReplaceService
+    public class EntityReplaceService : IEntityReplaceService
     {
         private readonly FeedContext _context;
 

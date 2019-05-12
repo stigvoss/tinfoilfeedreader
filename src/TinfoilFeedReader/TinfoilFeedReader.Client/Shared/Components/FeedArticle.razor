@@ -1,4 +1,4 @@
-﻿@inherits TinfoilFeedReader.Client.Shared.Components.CodeBehinds.FeedBoxComponent
+﻿@inherits TinfoilFeedReader.Client.Shared.Components.CodeBehinds.FeedArticleComponent
 
 <div class="feed-box">
     <div class="image">
@@ -13,7 +13,7 @@
         </a>
     </h5>
     <em>
-        @Article.Source.Name, @Article.TimeSincePublish()
+        &lt;Name&gt;, @Article.TimeSincePublish()
     </em>
     <p>
         @Article.Summary

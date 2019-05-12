@@ -12,9 +12,9 @@
     <div class="feed">
         @if (Articles is object)
         {
-            foreach (var article in Articles.OrderByDescending(article => article.PublishDate))
+            foreach (var article in Articles)
             {
-                <FeedBox Article=@article />
+                <FeedArticle Article=@article />
             }
         }
     </div>

@@ -16,7 +16,6 @@ namespace TinfoilFeedReader.Server
                 .UseConfiguration(new ConfigurationBuilder()
                     .AddCommandLine(args)
                     .AddJsonFile("appsettings.json")
-                    .AddEnvironmentVariables("APP_")
                     .Build())
                 .UseStartup<Startup>()
                 .Build();

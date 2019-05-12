@@ -1,23 +1,21 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Module.Feeds.Domain;
+using Module.Feeds.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace TinfoilFeedReader.Client.Shared.Components.CodeBehinds
 {
-    public class FeedManageComponent : ComponentBase
+    public class FeedArticleComponent : ComponentBase
     {
         [Parameter]
-        public Feed Feed { get; set; }
+        public Article Article { get; set; }
 
-        protected bool IsEditing { get; set; } = false;
+        public string ImageData { get; set; }
 
-        protected void ToggleEdit()
-        {
-            IsEditing = !IsEditing;
-        }
+        [Inject]
+        protected ImageLoadService ImageLoader { get; set; }
     }
 }

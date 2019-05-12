@@ -1,0 +1,28 @@
+﻿@page "/feedcollections/{FeedCollectionId:guid}/feed/create"
+@inherits TinfoilFeedReader.Client.Pages.CodeBehinds.CreateFeedPage
+
+
+<SideBar>
+    <FeedMenu FeedCollectionId=@FeedCollectionId />
+</SideBar>
+
+<main>
+    <h1>Create Feed</h1>
+
+    <div class="manage-feed">
+        <div class="label">
+            <label>
+                Title
+            </label>
+            <a onclick=@CreateFeed>
+                <span class="oi edit done" data-glyph="check"></span>
+            </a>
+        </div>
+        <div class="input">
+            <input bind="@Feed.Name" />
+        </div>
+        <div class="sources">
+            <h2>Sources</h2>
+        </div>
+    </div>
+</main>

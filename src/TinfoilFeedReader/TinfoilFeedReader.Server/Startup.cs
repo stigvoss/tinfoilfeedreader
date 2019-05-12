@@ -10,6 +10,7 @@ using Module.Feeds.Domain.Base;
 using Module.Feeds.Infrastructure.EntityFrameworkCore;
 using Module.Feeds.Infrastructure.EntityFrameworkCore.Base;
 using Module.Feeds.Infrastructure.EntityFrameworkCore.Repositories;
+using Module.Feeds.Infrastructure.EntityFrameworkCore.Services;
 using Newtonsoft.Json;
 using Npgsql;
 using System.Linq;
@@ -38,10 +39,10 @@ namespace TinfoilFeedReader.Server
                     new[] { "application/octet-stream" });
             });
 
-            var connectionString = GetConnectionString(Configuration);
+            var connectionString = Configuration.GetConnectionString("FeedConnection");
 
             services.AddDbContextPool<FeedContext>(options => options.UseNpgsql(connectionString));
-            services.AddScoped<EntityReplaceService>();
+            services.AddScoped<IEntityReplaceService, EntityReplaceService>();
             services.AddScoped<IRepository<FeedCollection>, FeedCollectionsRepository>();
             services.AddScoped<ISourcesRepository, SourcesRepository>();
 

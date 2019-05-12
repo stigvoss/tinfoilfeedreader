@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Module.Feeds.Domain;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,19 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
         [Inject]
         public HttpClient Http { get; set; }
 
+        [Inject]
+        public IJSRuntime JsRuntime { get; set; }
+
+        [Inject]
+        public IUriHelper UriHelper { get; set; }
+
         [Parameter]
         protected Guid? FeedCollectionId { get; set; }
 
         [Parameter]
         protected Guid? FeedId { get; set; }
 
-        protected bool IsEditing { get; set; } = false;
+        protected bool IsEditing { get; set; }
 
         public Feed Feed { get; private set; }
 
@@ -27,18 +34,33 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
         {
             if (IsEditing)
             {
-                await Http.PutJsonAsync($"api/feedcollections/{FeedCollectionId}/feed", Feed)
+                await Http
+                    .PutJsonAsync($"api/feedcollections/{FeedCollectionId}/feed", Feed)
                     .ConfigureAwait(false);
             }
 
             IsEditing = !IsEditing;
         }
 
+        protected async Task DeleteFeed()
+        {
+            if (await JsRuntime.InvokeAsync<bool>("confirm", $"{Feed.Name} will be removed."))
+            {
+                await Http
+                    .DeleteAsync($"api/feedcollections/{FeedCollectionId}/feed/{Feed.Id}")
+                    .ConfigureAwait(false);
+
+                UriHelper.NavigateTo($"feedcollections/{FeedCollectionId}");
+            }
+        }
+
         protected override async Task OnParametersSetAsync()
         {
-            var collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId.Value}")
+            var collection = await Http
+                .GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId.Value}")
                 .ConfigureAwait(false);
-            Feed = collection.Feeds.FirstOrDefault(e => e.Id == FeedId);
+
+            Feed = collection.Feeds.FirstOrDefault(feed => feed.Id == FeedId);
         }
     }
 }

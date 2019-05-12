@@ -3,8 +3,8 @@
 @if (FeedCollectionId is object)
 {
     <h6>
-        <span>Collections</span>
-        <a href=@($"/feedcollections/{FeedCollectionId}/manage")>
+        <span>Feeds</span>
+        <a href=@($"/feedcollections/{FeedCollectionId}/feed/create")>
             <span class="oi" data-glyph="plus"></span>
         </a>
     </h6>
@@ -23,7 +23,7 @@
                     <a href="@($"/feedcollections/{FeedCollectionId}/feed/{feed.Id}")">
                         @feed.Name
                     </a>
-                    <a class="edit" href=@($"/feedcollections/{FeedCollectionId}/manage/{feed.Id}")>
+                    <a class="edit" href=@($"/feedcollections/{FeedCollectionId}/feed/{feed.Id}/manage")>
                         <span class="oi" data-glyph="cog"></span>
                     </a>
                 </li>

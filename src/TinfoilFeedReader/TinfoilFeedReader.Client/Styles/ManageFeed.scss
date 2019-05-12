@@ -7,10 +7,15 @@
 
         .edit {
             font-size: 0.75rem;
+            cursor: pointer;
         }
 
         .done {
             color: lawngreen;
+        }
+
+        .remove {
+            color: red;
         }
     }
 
