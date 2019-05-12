@@ -4,13 +4,13 @@
 {
     <h6>
         <span>Collections</span>
-        <a>+</a>
+        <a href="@($"/feedcollections/{FeedCollectionId}/manage")">+</a>
     </h6>
     <ul>
         @if (Collection is object)
         {
             <li>
-                <a href="@($"/feedcollections/{FeedCollectionId.ToString()}")">
+                <a href="@($"/feedcollections/{FeedCollectionId}")">
                     All
                 </a>
             </li>
@@ -18,7 +18,7 @@
             foreach (var feed in Collection.Feeds.OrderBy(feed => feed.SequenceIndex))
             {
                 <li>
-                    <a href="@($"/feedcollections/{FeedCollectionId.ToString()}/feed/{feed.Id.ToString()}")">
+                    <a href="@($"/feedcollections/{FeedCollectionId}/feed/{feed.Id}")">
                         @feed.Name
                     </a>
                 </li>

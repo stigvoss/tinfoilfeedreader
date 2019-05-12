@@ -1,0 +1,19 @@
+﻿@page "/feedcollections/{FeedCollectionId:guid}/manage"
+@inherits TinfoilFeedReader.Client.Pages.CodeBehinds.ManageFeedCollectionsComponent
+
+
+<SideBar>
+    <FeedMenu FeedCollectionId=@FeedCollectionId />
+</SideBar>
+
+<main>
+    <h1>Manage Collection</h1>
+
+    @if (Collection is object)
+    {
+        foreach (var feed in Collection.Feeds.OrderBy(feed => feed.SequenceIndex))
+        {
+            <h3>@feed.Name</h3>
+        }
+    }
+</main>
