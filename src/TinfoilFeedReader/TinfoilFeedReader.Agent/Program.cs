@@ -22,16 +22,16 @@ namespace TilfoilFeedReader.FeedAgent
         static async Task Main(string[] args)
         {
             var builder = new HostBuilder()
-                .ConfigureAppConfiguration(configuration => configuration
-                    .AddCommandLine(args)
-                    .AddJsonFile("appsettings.json")
-                    .AddEnvironmentVariables("APP_")
-                    .Build())
                 .ConfigureHostConfiguration(configuration => configuration
                     .AddEnvironmentVariables("HOST_"))
+                .ConfigureAppConfiguration((context, configuration) => configuration
+                    .AddCommandLine(args)
+                    .AddJsonFile("appsettings.json")
+                    .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true)
+                    .Build())
                 .ConfigureServices((context, services) =>
                 {
-                    var connectionString = GetConnectionString(context.Configuration);
+                    var connectionString = context.Configuration.GetConnectionString("FeedConnection");
 
                     services.AddDbContextPool<FeedContext>(options => options.UseNpgsql(connectionString));
                     services.AddScoped<ISourcesRepository, SourcesRepository>();
@@ -40,17 +40,6 @@ namespace TilfoilFeedReader.FeedAgent
                 .ConfigureLogging(logging => logging.AddConsole());
 
             await builder.RunConsoleAsync();
-        }
-
-        private static string GetConnectionString(IConfiguration configuration)
-        {
-            return new NpgsqlConnectionStringBuilder
-            {
-                Host = configuration.GetValue<string>("DB_HOST"),
-                Port = configuration.GetValue<int>("DB_PORT"),
-                Username = configuration.GetValue<string>("DB_USER"),
-                Password = configuration.GetValue<string>("DB_PASSWORD")
-            }.ConnectionString;
         }
 
         class FeedUpdateAgent : IHostedService

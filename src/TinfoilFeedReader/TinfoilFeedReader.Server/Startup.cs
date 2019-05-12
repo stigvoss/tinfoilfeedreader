@@ -49,17 +49,6 @@ namespace TinfoilFeedReader.Server
             services.AddResponseCaching();
         }
 
-        private string GetConnectionString(IConfiguration configuration)
-        {
-            return new NpgsqlConnectionStringBuilder
-            {
-                Host = configuration.GetValue<string>("DB_HOST"),
-                Port = configuration.GetValue<int>("DB_PORT"),
-                Username = configuration.GetValue<string>("DB_USER"),
-                Password = configuration.GetValue<string>("DB_PASSWORD")
-            }.ConnectionString;
-        }
-
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();

@@ -9,10 +9,6 @@ services:
     environment:
      - VIRTUAL_HOST=dock02.voss.net
      - ASPNETCORE_ENVIRONMENT=Docker
-     - APP_DB_USER=postgres
-     - APP_DB_PASSWORD=Ch4nge/Me!
-     - APP_DB_HOST=db
-     - APP_DB_PORT=5432
     networks:
      - proxy
      - backend
@@ -26,10 +22,6 @@ services:
       dockerfile: TinfoilFeedReader.Agent/Dockerfile
     environment:
      - HOST_ENVIRONMENT=Docker
-     - APP_DB_USER=postgres
-     - APP_DB_PASSWORD=Ch4nge/Me!
-     - APP_DB_HOST=db
-     - APP_DB_PORT=5432
     networks:
      - backend
     depends_on:
