@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Module.Feeds\Module.Feeds.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\" />
+  </ItemGroup>
+
 </Project>

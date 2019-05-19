@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using TinfoilFeedReader.Client.Infrastructure;
 
 namespace TinfoilFeedReader.Client.Pages.CodeBehinds
 {
     public class ManageFeedPage : ComponentBase
     {
         [Inject]
-        public HttpClient Http { get; set; }
+        public IDataAccess Service { get; set; }
 
         [Inject]
         public IJSRuntime JsRuntime { get; set; }
@@ -29,14 +30,13 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
         protected bool IsEditing { get; set; }
 
         public Feed Feed { get; private set; }
+        public FeedCollection Collection { get; private set; }
 
         protected async Task ToggleEdit()
         {
             if (IsEditing)
             {
-                await Http
-                    .PutJsonAsync($"api/feedcollections/{FeedCollectionId}/feed", Feed)
-                    .ConfigureAwait(false);
+                await Service.UpdateFeed(Collection, Feed);
             }
 
             IsEditing = !IsEditing;
@@ -46,21 +46,19 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
         {
             if (await JsRuntime.InvokeAsync<bool>("confirm", $"{Feed.Name} will be removed."))
             {
-                await Http
-                    .DeleteAsync($"api/feedcollections/{FeedCollectionId}/feed/{Feed.Id}")
+                await Service.DeleteFeed(Collection, Feed)
                     .ConfigureAwait(false);
 
-                UriHelper.NavigateTo($"feedcollections/{FeedCollectionId}");
+                UriHelper.NavigateTo($"feedcollections/{Collection.Id}/00000000-0000-0000-0000-000000000000");
             }
         }
 
         protected override async Task OnParametersSetAsync()
         {
-            var collection = await Http
-                .GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId.Value}")
+            Collection = await Service.GetFeedCollection(FeedCollectionId)
                 .ConfigureAwait(false);
 
-            Feed = collection.Feeds.FirstOrDefault(feed => feed.Id == FeedId);
+            Feed = Collection?.Feeds?.FirstOrDefault(feed => feed.Id == FeedId);
         }
     }
 }

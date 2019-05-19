@@ -1,10 +1,10 @@
 ﻿@inherits TinfoilFeedReader.Client.Shared.Components.CodeBehinds.FeedMenuComponent
 
-@if (FeedCollectionId is object)
+@if (Collection is object)
 {
     <h6>
         <span>Feeds</span>
-        <a href=@($"/feedcollections/{FeedCollectionId}/feed/create")>
+        <a href=@($"/feedcollections/{Collection.Id}/feed/create")>
             <span class="oi" data-glyph="plus"></span>
         </a>
     </h6>
@@ -12,7 +12,7 @@
         @if (Collection is object)
         {
             <li>
-                <a href="@($"/feedcollections/{FeedCollectionId}")">
+                <a href="@($"/feedcollections/{Collection.Id}/feed/00000000-0000-0000-0000-000000000000")">
                     All
                 </a>
             </li>
@@ -20,10 +20,10 @@
             foreach (var feed in Collection.Feeds.OrderBy(feed => feed.SequenceIndex))
             {
                 <li>
-                    <a href="@($"/feedcollections/{FeedCollectionId}/feed/{feed.Id}")">
+                    <a href="@($"/feedcollections/{Collection.Id}/feed/{feed.Id}")">
                         @feed.Name
                     </a>
-                    <a class="edit" href=@($"/feedcollections/{FeedCollectionId}/feed/{feed.Id}/manage")>
+                    <a class="edit" href=@($"/feedcollections/{Collection.Id}/feed/{feed.Id}/manage")>
                         <span class="oi" data-glyph="cog"></span>
                     </a>
                 </li>

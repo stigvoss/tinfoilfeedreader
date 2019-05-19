@@ -5,26 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using TinfoilFeedReader.Client.Infrastructure;
 
 namespace TinfoilFeedReader.Client.Shared.Components.CodeBehinds
 {
     public class FeedMenuComponent : ComponentBase
     {
         [Inject]
-        public HttpClient Http { get; set; }
+        public IDataAccess Service { get; set; }
 
         [Parameter]
-        public Guid? FeedCollectionId { get; set; }
-
         public FeedCollection Collection { get; set; }
-
-        protected override async Task OnInitAsync()
-        {
-            if (FeedCollectionId is object)
-            {
-                Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId}")
-                    .ConfigureAwait(false);
-            }
-        }
     }
 }

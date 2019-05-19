@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using TinfoilFeedReader.Client.Infrastructure;
 
 namespace TinfoilFeedReader.Client.Pages.CodeBehinds
 {
@@ -17,7 +18,7 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
         protected Guid? FeedId { get; set; }
 
         [Inject]
-        protected HttpClient Http { get; set; }
+        protected IDataAccess Service { get; set; }
 
         protected IEnumerable<Article> Articles { get; set; }
 
@@ -27,31 +28,18 @@ namespace TinfoilFeedReader.Client.Pages.CodeBehinds
 
         protected override async Task OnParametersSetAsync()
         {
-            if (FeedCollectionId is object)
-            {
-                Collection = await Http.GetJsonAsync<FeedCollection>($"api/feedcollections/{FeedCollectionId.Value}")
-                    .ConfigureAwait(false);
+            Collection = await Service
+                .GetFeedCollection(FeedCollectionId)
+                .ConfigureAwait(false);
 
-                if (FeedId is object)
-                {
-                    Title = Collection?.Feeds?.First(e => e.Id == FeedId.Value)?.Name;
-                }
-                else
-                {
-                    Title = "All";
-                }
-            }
+            var feed = Collection?.Feeds?
+                .FirstOrDefault(e => e.Id == FeedId);
 
-            if (FeedCollectionId is object && FeedId is object)
-            {
-                Articles = await Http.GetJsonAsync<Article[]>($"api/feedcollections/{FeedCollectionId.Value}/feed/{FeedId.Value}/articles")
-                    .ConfigureAwait(false);
-            }
-            else if (FeedCollectionId is object)
-            {
-                Articles = await Http.GetJsonAsync<Article[]>($"api/feedcollections/{FeedCollectionId.Value}/articles")
-                    .ConfigureAwait(false);
-            }
+            Title = feed?.Name ?? "All";
+
+            Articles = await Service
+                .GetArticles(Collection, feed)
+                .ConfigureAwait(false);
         }
     }
 }
