@@ -71,9 +71,10 @@ namespace TinfoilFeedReader.Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapFallbackToClientSideBlazor<Client.Startup>("index.html");
             });
 
-            app.UseBlazor<Client.Startup>();
+            app.UseClientSideBlazorFiles<Client.Startup>();
         }
     }
 }
